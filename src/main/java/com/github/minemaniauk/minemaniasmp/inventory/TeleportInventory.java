@@ -36,7 +36,7 @@ public class TeleportInventory extends InventoryInterface {
      * Used to create an instance of the inventory.
      */
     public TeleportInventory() {
-        super(54, "&f₴₴₴₴₴₴₴₴▶\uD83C");
+        super(54, "&f₴₴₴₴₴₴₴₴✳");
     }
 
     @Override

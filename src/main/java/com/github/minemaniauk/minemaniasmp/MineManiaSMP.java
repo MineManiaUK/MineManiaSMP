@@ -1,7 +1,10 @@
 package com.github.minemaniauk.minemaniasmp;
 
 import com.github.cozyplugins.cozylibrary.CozyPlugin;
+import com.github.cozyplugins.cozylibrary.inventory.action.action.CloseAction;
 import com.github.cozyplugins.cozylibrary.location.Region3D;
+import com.github.cozyplugins.cozylibrary.user.PlayerUser;
+import com.github.cozyplugins.cozylibrary.user.User;
 import com.github.minemaniauk.minemaniasmp.command.TeleportCommand;
 import com.github.minemaniauk.minemaniasmp.inventory.TeleportInventory;
 import org.bukkit.Bukkit;
@@ -9,7 +12,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerPortalEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -42,7 +48,7 @@ public final class MineManiaSMP extends CozyPlugin implements Listener {
         Player player = event.getPlayer();
 
         Region3D region3D = new Region3D(player.getLocation(), player.getLocation());
-        region3D.expand(10);
+        region3D.expand(20);
 
         Location portalLocation = new Location(Bukkit.getWorld("world"), 19, 114, 0);
 
@@ -50,6 +56,10 @@ public final class MineManiaSMP extends CozyPlugin implements Listener {
         if (!region3D.contains(portalLocation)) return;
 
         event.setCancelled(true);
+
+        if (player.getOpenInventory().getTopInventory().getType() == InventoryType.CHEST) return;
+
+        player.teleport(new Location(Bukkit.getWorld("world"), 13, 113, 0));
         new TeleportInventory().open(player);
     }
 
