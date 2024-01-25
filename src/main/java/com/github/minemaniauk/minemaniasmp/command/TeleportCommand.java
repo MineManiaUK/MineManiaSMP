@@ -30,14 +30,50 @@ import com.github.cozyplugins.cozylibrary.user.PlayerUser;
 import com.github.cozyplugins.cozylibrary.user.User;
 import com.github.minemaniauk.minemaniasmp.inventory.TeleportInventory;
 import com.github.smuddgge.squishyconfiguration.interfaces.ConfigurationSection;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Arrays;
 
 /**
  * Represents the teleport command.
  * Used to open the teleport inventory.
  */
 public class TeleportCommand implements CommandType {
+
+    /**
+     * Represents the places the player
+     * can use as an argument to teleport to.
+     */
+    public enum Place {
+        HORSES("world", 74, 107, 16),
+        // FISHING("world", 128, 79, -63),
+        PVP("world", 109, 84, 70),
+        LEADERBOARDS("world", 40, 124, 70),
+        STORAGE("world", 5, 114, 19),
+        // CRATES("world", 52, 113, -41),
+        // RESOURCES("world", 21, 80, -107),
+        AUCTIONHOUSE("world", 11, 116, -18),
+        JOBS("world", 5, 116, -18);
+        // BATTLEPASS("world", 0, 118, 0);
+
+        private final @NotNull Location location;
+
+        Place(@NotNull String worldName, double x, double y, double z) {
+            this.location = new Location(Bukkit.getWorld(worldName), x, y, z);
+        }
+
+        /**
+         * Used to get the place's location.
+         *
+         * @return The location of the place.
+         */
+        public @NotNull Location getLocation() {
+            return this.location;
+        }
+    }
 
     @Override
     public @NotNull String getIdentifier() {
@@ -61,7 +97,11 @@ public class TeleportCommand implements CommandType {
 
     @Override
     public @Nullable CommandSuggestions getSuggestions(@NotNull User user, @NotNull ConfigurationSection section, @NotNull CommandArguments arguments) {
-        return null;
+        return new CommandSuggestions().append(Arrays.stream(Place.values())
+                .map(Place::toString)
+                .map(String::toLowerCase)
+                .toList()
+        );
     }
 
     @Override
@@ -71,6 +111,27 @@ public class TeleportCommand implements CommandType {
 
     @Override
     public @Nullable CommandStatus onPlayer(@NotNull PlayerUser user, @NotNull ConfigurationSection section, @NotNull CommandArguments arguments) {
+
+        if (!arguments.getArguments().isEmpty() && !arguments.getArguments().get(0).isEmpty()) {
+            final String placeName = arguments.getArguments().get(0);
+
+            // Check if the place doesn't exist.
+            if (!Arrays.stream(Place.values())
+                    .map(Place::name)
+                    .map(String::toLowerCase)
+                    .toList()
+                    .contains(placeName)) {
+
+                user.sendMessage("&7That place does not exist.");
+                return new CommandStatus();
+            }
+
+            Place place = Place.valueOf(placeName.toUpperCase());
+            user.sendMessage("&7Teleporting to &f" + placeName + "&7.");
+            user.getPlayer().teleport(place.getLocation());
+            return new CommandStatus();
+        }
+
         user.sendMessage("&7Opening the teleport inventory...");
         new TeleportInventory().open(user.getPlayer());
         return new CommandStatus();
