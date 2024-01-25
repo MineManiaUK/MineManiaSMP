@@ -1,0 +1,4 @@
+name: MineManiaSMP
+version: '${project.version}'
+main: com.github.minemaniauk.minemaniasmp.MineManiaSMP
+api-version: '1.20'
