@@ -66,6 +66,13 @@
             <artifactId>CozyLibrary</artifactId>
             <version>1.5.0</version>
         </dependency>
+
+        <!-- Cozy Deliveries -->
+        <dependency>
+            <groupId>com.github.Cozy-Plugins</groupId>
+            <artifactId>CozyDeliveries</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
   <build>
@@ -78,19 +85,6 @@
           <source>16</source>
           <target>16</target>
         </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-shade-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
     <resources>

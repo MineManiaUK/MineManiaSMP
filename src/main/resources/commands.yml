@@ -1,3 +1,7 @@
 teleport:
   type: "teleport"
   name: "teleport"
+
+info:
+  type: "info"
+  name: "info"

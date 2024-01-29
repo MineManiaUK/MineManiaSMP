@@ -47,9 +47,9 @@ public class TeleportInventory extends InventoryInterface {
                 .setMaterial(Material.PINK_STAINED_GLASS_PANE)
                 .setCustomModelData(1)
                 .setName("&a&lBack")
-                .setLore("&7Click to go to the &f/help &7menu.")
+                .setLore("&7Click to go to the &f/info &7menu.")
                 .addAction((ClickAction) (user, type, inventory) -> {
-                    user.runCommandsAsOp("help");
+                    user.runCommandsAsOp("infomation");
                 })
                 .addSlot(45)
         );
@@ -189,9 +189,9 @@ public class TeleportInventory extends InventoryInterface {
     /**
      * Used to create a simple teleport button.
      *
-     * @param title The button's title.
+     * @param title   The button's title.
      * @param command The button's command to execute.
-     * @param slots The button's slots.
+     * @param slots   The button's slots.
      */
     private void createTeleportButton(@NotNull String title, @NotNull String command, @NotNull Integer... slots) {
         // Fishing button.

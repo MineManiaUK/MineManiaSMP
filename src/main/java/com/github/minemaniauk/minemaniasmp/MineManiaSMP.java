@@ -1,11 +1,13 @@
 package com.github.minemaniauk.minemaniasmp;
 
+import com.github.cozyplugins.cozydeliveries.CozyDeliveries;
+import com.github.cozyplugins.cozydeliveries.CozyDeliveriesAPI;
 import com.github.cozyplugins.cozylibrary.CozyPlugin;
-import com.github.cozyplugins.cozylibrary.inventory.action.action.CloseAction;
 import com.github.cozyplugins.cozylibrary.location.Region3D;
 import com.github.cozyplugins.cozylibrary.user.PlayerUser;
-import com.github.cozyplugins.cozylibrary.user.User;
+import com.github.minemaniauk.minemaniasmp.command.InfomationCommand;
 import com.github.minemaniauk.minemaniasmp.command.TeleportCommand;
+import com.github.minemaniauk.minemaniasmp.inventory.InfoInventory;
 import com.github.minemaniauk.minemaniasmp.inventory.TeleportInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,10 +15,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.util.Vector;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 /**
  * Represents the main class.
@@ -38,6 +42,7 @@ public final class MineManiaSMP extends CozyPlugin implements Listener {
 
         // Add the commands.
         this.addCommandType(new TeleportCommand());
+        this.addCommand(new InfomationCommand());
 
         // Register the events.
         this.getServer().getPluginManager().registerEvents(this, this);
@@ -61,6 +66,22 @@ public final class MineManiaSMP extends CozyPlugin implements Listener {
 
         player.teleport(new Location(Bukkit.getWorld("world"), 13, 113, 0));
         new TeleportInventory().open(player);
+    }
+
+    @EventHandler
+    public void onCommandRegisterEvent(PlayerCommandPreprocessEvent event) {
+        if (event.getMessage().startsWith("/info")) {
+            event.setMessage("/infomation");
+        }
+    }
+
+    /**
+     * Used to get the cozy deliveries api.
+     *
+     * @return The cozy deliveries api.
+     */
+    public @NotNull CozyDeliveriesAPI getDeliveriesAPI() {
+        return (CozyDeliveries) Objects.requireNonNull(Bukkit.getServer().getPluginManager().getPlugin("CozyDeliveries"));
     }
 
     /**
