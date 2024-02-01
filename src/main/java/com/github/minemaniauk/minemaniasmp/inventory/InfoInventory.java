@@ -166,19 +166,19 @@ public class InfoInventory extends InventoryInterface {
 
                     // Check if they have inventory space.
                     if (!delivery.hasInventorySpace(user1)) {
-                        user1.sendMessage("&7You dont have enough inventory space to collect this delivery.");
+                        user1.sendMessage("&7&l> &7You dont have enough inventory space to collect this delivery.");
                         return;
                     }
 
                     // Give the delivery to the player.
                     boolean success = delivery.give(user1);
                     if (success) {
-                        user1.sendMessage("&7You have received a delivery.");
+                        user1.sendMessage("&7&l> &7You have received a delivery.");
                         this.onGenerate(user1);
                         return;
                     }
 
-                    user1.sendMessage("&7Failed to receive a delivery.");
+                    user1.sendMessage("&7&l> &7Failed to receive a delivery.");
                 })
                 .addSlot(29)
         );

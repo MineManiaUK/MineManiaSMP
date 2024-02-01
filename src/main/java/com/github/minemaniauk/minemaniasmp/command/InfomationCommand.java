@@ -34,12 +34,12 @@ public class InfomationCommand implements CozyCommand {
 
     @Override
     public @NotNull String getName() {
-        return "infomation";
+        return "info";
     }
 
     @Override
     public @Nullable CommandAliases getAliases() {
-        return new CommandAliases().append("info");
+        return new CommandAliases().append("infomation");
     }
 
     @Override
@@ -74,7 +74,6 @@ public class InfomationCommand implements CozyCommand {
 
     @Override
     public @Nullable CommandStatus onPlayerUser(@NotNull PlayerUser user, @NotNull CommandArguments arguments, @NotNull CommandStatus status) {
-        user.sendMessage("&7Opening info menu...");
         new InfoInventory().open(user.getPlayer());
         return new CommandStatus();
     }

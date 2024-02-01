@@ -48,7 +48,7 @@ public class TeleportCommand implements CommandType {
      * can use as an argument to teleport to.
      */
     public enum Place {
-        HORSES("world", 74, 107, 16),
+        HORSES("world", 133, 80, -84),
         // FISHING("world", 128, 79, -63),
         PVP("world", 109, 84, 70),
         LEADERBOARDS("world", 40, 124, 70),
@@ -122,17 +122,16 @@ public class TeleportCommand implements CommandType {
                     .toList()
                     .contains(placeName)) {
 
-                user.sendMessage("&7That place does not exist.");
+                user.sendMessage("&7&l> &7That place does not exist.");
                 return new CommandStatus();
             }
 
             Place place = Place.valueOf(placeName.toUpperCase());
-            user.sendMessage("&7Teleporting to &f" + placeName + "&7.");
+            user.sendMessage("&7&l> &7Teleporting to &f" + placeName + "&7.");
             user.getPlayer().teleport(place.getLocation());
             return new CommandStatus();
         }
 
-        user.sendMessage("&7Opening the teleport inventory...");
         new TeleportInventory().open(user.getPlayer());
         return new CommandStatus();
     }

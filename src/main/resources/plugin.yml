@@ -3,3 +3,7 @@ version: '${project.version}'
 main: com.github.minemaniauk.minemaniasmp.MineManiaSMP
 api-version: '1.20'
 depend: [ "CozyDeliveries" ]
+
+commands:
+  info:
+    description: Used to open the smp main menu.

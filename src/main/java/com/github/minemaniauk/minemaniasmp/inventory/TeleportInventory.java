@@ -76,11 +76,11 @@ public class TeleportInventory extends InventoryInterface {
                 .setCustomModelData(1)
                 .setName("&2&lRandom Teleport")
                 .setLore("&eTeleport to a random location",
-                        "&ein a world.",
+                        "&ein the world!",
                         "&7",
-                        "&7Click to open the &f/rtp &7menu.")
+                        "&7Click to run &f/rtp&7.")
                 .addAction((ClickAction) (user, type, inventory) -> {
-                    user.runCommandsAsOp("warps");
+                    user.runCommandsAsOp("rtp");
                 })
                 .addSlot(3, 4, 5,
                         12, 13, 14,
