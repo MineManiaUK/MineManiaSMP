@@ -5,6 +5,7 @@ import com.github.cozyplugins.cozydeliveries.CozyDeliveriesAPI;
 import com.github.cozyplugins.cozylibrary.CozyPlugin;
 import com.github.cozyplugins.cozylibrary.location.Region3D;
 import com.github.cozyplugins.cozylibrary.user.PlayerUser;
+import com.github.minemaniauk.minemaniasmp.command.ChestShopCommand;
 import com.github.minemaniauk.minemaniasmp.command.InfomationCommand;
 import com.github.minemaniauk.minemaniasmp.command.TeleportCommand;
 import com.github.minemaniauk.minemaniasmp.inventory.InfoInventory;
@@ -42,6 +43,7 @@ public final class MineManiaSMP extends CozyPlugin implements Listener {
 
         // Add the commands.
         this.addCommandType(new TeleportCommand());
+        this.addCommandType(new ChestShopCommand());
         this.addCommand(new InfomationCommand());
 
         // Register the events.

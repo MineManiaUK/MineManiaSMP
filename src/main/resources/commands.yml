@@ -5,3 +5,7 @@ teleport:
 info:
   type: "info"
   name: "info"
+
+chestshop:
+  type: "chestshop"
+  name: "chestshop"

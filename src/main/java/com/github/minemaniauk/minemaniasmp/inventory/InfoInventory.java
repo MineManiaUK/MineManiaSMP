@@ -48,15 +48,17 @@ public class InfoInventory extends InventoryInterface {
                 .setMaterial(Material.PINK_STAINED_GLASS_PANE)
                 .setCustomModelData(1)
                 .setName("&b&lHelp")
-                .setLore("&e1) &f/teleport &7Then click random to",
-                        "&7find a place to set up base.",
+                .setLore("&7",
+                        "&e1) Find a place for your base.",
+                        "&7- &f/teleport &7Then click random to teleport",
+                        "&7 &7 &7 to a random location.",
+                        "&7- &f/teleport horses &7To explore with a horse.",
                         "&7",
-                        "&e2) &f/kit claim &7To claim your land.",
+                        "&e2) &f/kit claim &eTo claim your land.",
                         "&7",
-                        "&e3) &f/jobs &7To join a job and earn money.",
+                        "&e3) &f/jobs &eTo join a job and earn money.",
                         "&7",
-                        "&e4) Have fun! :D and &f/help &7to explore",
-                        "&7more features.")
+                        "&bAnd Have fun! :D")
                 .addSlot(45, 46)
         );
 
@@ -94,9 +96,12 @@ public class InfoInventory extends InventoryInterface {
                 .setMaterial(Material.PINK_STAINED_GLASS_PANE)
                 .setCustomModelData(1)
                 .setName("&6&lAuction House")
-                .setLore("&eComing soon...")
+                .setLore("&7Click to open the &f/ah")
                 .addSlot(6, 7, 8,
                         15, 16, 17)
+                .addAction((ClickAction) (user, type, inventory) -> {
+                    user.runCommandsAsOp("ah");
+                })
         );
 
         // Deliveries button.
@@ -150,12 +155,9 @@ public class InfoInventory extends InventoryInterface {
         lore.add("&7Click to collect delivery.");
         lore.add("&7");
         lore.add("&e&lContent");
-        lore.addAll(new ArrayList<>(List.of(delivery
-                        .getContenceString()
-                        .replace(", ", "\n&f")
-                        .split("\n")
-                ))
-        );
+        lore.addAll(delivery.getDeliveryContent().getLoreNotEmpty());
+        lore.add("&7");
+        lore.add("&7From " + delivery.getFromName("None"));
 
         // One of the deliveries.
         this.setItem(new InventoryItem()
@@ -171,7 +173,7 @@ public class InfoInventory extends InventoryInterface {
                     }
 
                     // Give the delivery to the player.
-                    boolean success = delivery.give(user1);
+                    boolean success = delivery.giveAndDelete(user1);
                     if (success) {
                         user1.sendMessage("&7&l> &7You have received a delivery.");
                         this.onGenerate(user1);
