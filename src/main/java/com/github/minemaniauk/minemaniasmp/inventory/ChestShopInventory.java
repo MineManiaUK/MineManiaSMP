@@ -19,12 +19,12 @@
 
 package com.github.minemaniauk.minemaniasmp.inventory;
 
-import com.github.cozyplugins.cozylibrary.inventory.InventoryInterface;
+import com.github.cozyplugins.cozylibrary.inventory.CozyInventory;
 import com.github.cozyplugins.cozylibrary.inventory.InventoryItem;
 import com.github.cozyplugins.cozylibrary.user.PlayerUser;
 import org.bukkit.Material;
 
-public class ChestShopInventory extends InventoryInterface {
+public class ChestShopInventory extends CozyInventory {
 
     public ChestShopInventory() {
         super(54, "&f₴₴₴₴₴₴₴₴⚡");

@@ -19,7 +19,7 @@
 
 package com.github.minemaniauk.minemaniasmp.inventory;
 
-import com.github.cozyplugins.cozylibrary.inventory.InventoryInterface;
+import com.github.cozyplugins.cozylibrary.inventory.CozyInventory;
 import com.github.cozyplugins.cozylibrary.inventory.InventoryItem;
 import com.github.cozyplugins.cozylibrary.inventory.action.action.ClickAction;
 import com.github.cozyplugins.cozylibrary.user.PlayerUser;
@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
  * Represents the teleport inventory.
  * Used to show all the teleporting options for the player.
  */
-public class TeleportInventory extends InventoryInterface {
+public class TeleportInventory extends CozyInventory {
 
     /**
      * Used to create an instance of the inventory.
@@ -166,8 +166,8 @@ public class TeleportInventory extends InventoryInterface {
 
         // Storage button.
         this.createTeleportButton(
-                "&f&lAuction House",
-                "teleport auctionhouse",
+                "&f&lMarket",
+                "teleport market",
                 51
         );
 

@@ -19,8 +19,8 @@
 
 package com.github.minemaniauk.minemaniasmp.inventory;
 
-import com.github.cozyplugins.cozydeliveries.Delivery;
-import com.github.cozyplugins.cozylibrary.inventory.InventoryInterface;
+import com.github.cozyplugins.cozydeliveries.delivery.Delivery;
+import com.github.cozyplugins.cozylibrary.inventory.CozyInventory;
 import com.github.cozyplugins.cozylibrary.inventory.InventoryItem;
 import com.github.cozyplugins.cozylibrary.inventory.action.action.ClickAction;
 import com.github.cozyplugins.cozylibrary.user.PlayerUser;
@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Represents the smp main menu.
  */
-public class InfoInventory extends InventoryInterface {
+public class InfoInventory extends CozyInventory {
 
     public InfoInventory() {
         super(54, "&f₴₴₴₴₴₴₴₴✼");
@@ -59,7 +59,7 @@ public class InfoInventory extends InventoryInterface {
                         "&e3) &f/jobs &eTo join a job and earn money.",
                         "&7",
                         "&bAnd Have fun! :D")
-                .addSlot(45, 46)
+                .addSlot(45, 46, 47)
         );
 
         // Jobs button.
@@ -95,12 +95,12 @@ public class InfoInventory extends InventoryInterface {
         this.setItem(new InventoryItem()
                 .setMaterial(Material.PINK_STAINED_GLASS_PANE)
                 .setCustomModelData(1)
-                .setName("&6&lAuction House")
-                .setLore("&7Click to open the &f/ah")
+                .setName("&6&lMarket")
+                .setLore("&7Click to open the &f/market")
                 .addSlot(6, 7, 8,
                         15, 16, 17)
                 .addAction((ClickAction) (user, type, inventory) -> {
-                    user.runCommandsAsOp("ah");
+                    user.runCommandsAsOp("market");
                 })
         );
 
@@ -126,7 +126,8 @@ public class InfoInventory extends InventoryInterface {
                 .setMaterial(Material.PINK_STAINED_GLASS_PANE)
                 .setCustomModelData(1)
                 .setName("&d&lProfile")
-                .setLore("&eComing soon...")
+                .setLore("&7",
+                        "&aMoney &f" + player.getMoney() + " coins")
                 .addSlot(24, 25, 26,
                         33, 34, 35,
                         41, 42, 43)
@@ -148,41 +149,10 @@ public class InfoInventory extends InventoryInterface {
             return;
         }
 
+        // Get the delivery.
         final Delivery delivery = deliveryList.get(0);
 
-        List<String> lore = new ArrayList<>();
-
-        lore.add("&7Click to collect delivery.");
-        lore.add("&7");
-        lore.add("&e&lContent");
-        lore.addAll(delivery.getDeliveryContent().getLoreNotEmpty());
-        lore.add("&7");
-        lore.add("&7From " + delivery.getFromName("None"));
-
-        // One of the deliveries.
-        this.setItem(new InventoryItem()
-                .setMaterial(Material.BARREL)
-                .setName("&6&lDelivery")
-                .setLore(lore)
-                .addAction((ClickAction) (user1, type, inventory) -> {
-
-                    // Check if they have inventory space.
-                    if (!delivery.hasInventorySpace(user1)) {
-                        user1.sendMessage("&7&l> &7You dont have enough inventory space to collect this delivery.");
-                        return;
-                    }
-
-                    // Give the delivery to the player.
-                    boolean success = delivery.giveAndDelete(user1);
-                    if (success) {
-                        user1.sendMessage("&7&l> &7You have received a delivery.");
-                        this.onGenerate(user1);
-                        return;
-                    }
-
-                    user1.sendMessage("&7&l> &7Failed to receive a delivery.");
-                })
-                .addSlot(29)
-        );
+        // Set the delivery item.
+        this.setItem(delivery.getInventoryItem(this::onGenerate).addSlot(29));
     }
 }
