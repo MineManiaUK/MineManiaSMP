@@ -127,7 +127,7 @@ public class InfoInventory extends CozyInventory {
                 .setCustomModelData(1)
                 .setName("&d&lProfile")
                 .setLore("&7",
-                        "&aMoney &f" + player.getMoney() + " coins")
+                        "&aMoney &f" + ((int) player.getMoney()) + " coins")
                 .addSlot(24, 25, 26,
                         33, 34, 35,
                         41, 42, 43)

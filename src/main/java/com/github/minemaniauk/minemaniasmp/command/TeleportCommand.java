@@ -55,7 +55,7 @@ public class TeleportCommand implements CommandType {
         STORAGE("world", 5, 114, 19),
         CRATES("world", 59, 113, -38),
         // RESOURCES("world", 21, 80, -107),
-        MARKET("world", 11, 116, -18),
+        MARKET("world", 14, 117, -18.5),
         JOBS("world", 5, 116, -18);
         // BATTLEPASS("world", 0, 118, 0);
 
