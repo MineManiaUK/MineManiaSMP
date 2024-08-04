@@ -49,7 +49,7 @@ public class TeleportCommand implements CommandType {
      */
     public enum Place {
         HORSES("world", 133, 80, -84),
-        // FISHING("world", 128, 79, -63),
+        FISHING("world", 200, 77, -28),
         PVP("world", 109, 84, 70),
         LEADERBOARDS("world", 40, 124, 70),
         STORAGE("world", 5, 114, 19),

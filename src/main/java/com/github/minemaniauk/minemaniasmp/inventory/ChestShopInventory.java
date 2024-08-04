@@ -27,7 +27,7 @@ import org.bukkit.Material;
 public class ChestShopInventory extends CozyInventory {
 
     public ChestShopInventory() {
-        super(54, "&f₴₴₴₴₴₴₴₴⚡");
+        super(54, "&f₴₴₴₴₴₴₴₴촱");
     }
 
     @Override
